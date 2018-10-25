@@ -17,9 +17,9 @@ app.use(body_parser.json())
 const mysql_data_context = require('../../repositories/mysql-context')(config.mysql)
 // mysql_data_context.sequelize.sync()
 // // Repositories
-const PostRepository = require('../../repositories/user-repository')
+const UserRepository = require('../../repositories/user-repository')
 
-const user_repository = new PostRepository(mysql_data_context)
+const user_repository = new UserRepository(mysql_data_context)
 
 // Message Queue
 
@@ -27,12 +27,12 @@ const user_repository = new PostRepository(mysql_data_context)
 // Services
 const userService = require('../../services/user-service')
 
-const user_service = new PostService(user_repository)
+const user_service = new UserService(user_repository)
 
 // Controllers
 const userController = require('./controllers/user-controller')
 
-const user_controller = new PostController(user_service)
+const user_controller = new UserController(user_service)
 
 // Routes
 require('./routes/user-route')(app, user_controller)
