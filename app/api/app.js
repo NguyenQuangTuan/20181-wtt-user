@@ -15,27 +15,33 @@ app.use(body_parser.json())
 
 // Data Context
 const mysql_data_context = require('../../repositories/mysql-context')(config.mysql)
-// mysql_data_context.sequelize.sync()
-// // Repositories
-const UserRepository = require('../../repositories/user-repository')
 
-const user_repository = new UserRepository(mysql_data_context)
+// Search Engine
+const elasticsearch_engine = require('../../repositories/elasticsearch-engine')(config.elasticsearch)
 
 // Message Queue
+const KafkaProducer = require('../../messaging/kafka-producer')
 
+const kafka_producer = new KafkaProducer(config.message_producer.options, config.message_producer.topic)
+
+// Repositories
+const UserRepository = require('../../repositories/user-repository')
+
+const user_repository = new UserRepository(elasticsearch_engine)
 
 // Services
-const userService = require('../../services/user-service')
+const AuthenService = require('../../services/authen-service')
+const TokenService = require('../../services/token-service')
 
-const user_service = new UserService(user_repository)
-
+const authen_service = new AuthenService(user_repository, kafka_producer)
+const token_service = new TokenService()
 // Controllers
-const userController = require('./controllers/user-controller')
+const AuthenController = require('./controllers/authen-controller')
 
-const user_controller = new UserController(user_service)
+const authen_controller = new AuthenController(authen_service, token_service)
 
 // Routes
-require('./routes/user-route')(app, user_controller)
+require('./routes/authen-route')(app, authen_controller)
 
 // Error Handling
 app.use((err, req, res, next) => {
