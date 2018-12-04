@@ -1,5 +1,9 @@
 user = {
 	"settings": {
+		"index": {
+			"number_of_shards": 1,
+			"number_of_replicas": 1
+		},
 		"analysis": {
 			"analyzer": {
 				"autocomplete": {
@@ -19,8 +23,8 @@ user = {
 					]
 				},
 				"lowercase": {
-        			"tokenizer": "lowercase"
-        		}
+					"tokenizer": "lowercase"
+				}
 			},
 			"tokenizer": {
 				"prd_edge_ngram": {
