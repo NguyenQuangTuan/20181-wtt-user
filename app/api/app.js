@@ -26,22 +26,37 @@ const kafka_producer = new KafkaProducer(config.message_producer.options, config
 
 // Repositories
 const UserRepository = require('../../repositories/user-repository')
+const FollowRepository = require('../../repositories/follow-repository')
+const FavoriteRepository = require('../../repositories/favorite-repository')
 
 const user_repository = new UserRepository(elasticsearch_engine)
+const follow_repository = new FollowRepository(mysql_data_context)
+const favorite_repository = new FavoriteRepository(mysql_data_context)
 
 // Services
 const AuthenService = require('../../services/authen-service')
 const TokenService = require('../../services/token-service')
+const FollowService = require('../../services/follow-service')
+const FavoriteService = require('../../services/favorite-service')
 
 const authen_service = new AuthenService(user_repository, kafka_producer)
 const token_service = new TokenService()
+const follow_service = new FollowService(follow_repository)
+const favorite_service = new FavoriteService(favorite_repository)
+
 // Controllers
 const AuthenController = require('./controllers/authen-controller')
+const FollowController = require('./controllers/follow-controller')
+const FavoriteController = require('./controllers/favorite-controller')
 
 const authen_controller = new AuthenController(authen_service, token_service)
+const follow_controller = new FollowController(follow_service)
+const favorite_controller = new FavoriteController(favorite_service)
 
 // Routes
 require('./routes/authen-route')(app, authen_controller)
+require('./routes/follow-route')(app, follow_controller)
+require('./routes/favorite-route')(app, favorite_controller)
 
 // Error Handling
 app.use((err, req, res, next) => {

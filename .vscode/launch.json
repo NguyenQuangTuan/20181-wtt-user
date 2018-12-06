@@ -10,8 +10,17 @@
       "name": "Launch API",
       "program": "${workspaceFolder}/app/api/app.js",
       "env": {
-        "NODE_ENV": "local" 
+        "NODE_ENV": "local"
       }
-    }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Sync db",
+      "program": "${workspaceFolder}/scripts/sync-db.js",
+      "env": {
+        "NODE_ENV": "local"
+      }
+    },
   ]
 }
