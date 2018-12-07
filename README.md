@@ -6,7 +6,7 @@
 ```
  ## Run 
 ```
- sudo docker run --rm -p {port}:8080 --env NODE_ENV={ env } wtt-user:{version} (dev: 8081, main: 8181)
+ sudo docker run --rm -p {port}:8080 --env NODE_ENV={ env } tuannq/wtt:wtt-user-{version} (dev: 8081, main: 8181)
  ```
  ## Create tag
  ```
