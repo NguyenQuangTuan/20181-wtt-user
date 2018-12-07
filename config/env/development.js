@@ -34,4 +34,7 @@ module.exports = {
 		},
 		topic: 'tuan-wtt'
 	},
+	root_url: {
+		api: 'http://18.223.166.127:3000'
+	},
 }
