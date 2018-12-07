@@ -10,15 +10,15 @@
  ```
  ## Create tag
  ```
- sudo docker tag wtt-user:{ version } tuannq(repo)/wtt(group)/wtt-user:{ version }
+ sudo docker tag wtt-user:{ version } tuannq(repo)/wtt(group):wtt-user-{ version }
  ```
  ## Push tag
  ```
- sudo docker push tuannq(repo)/wtt(group)/wtt-user:{ version }
+ sudo docker push tuannq(repo)/wtt(group):wtt-user-{ version }
  ```
  ## Pull tag
  ```
- sudo docker pull tuannq(repo)/wtt(group)/wtt-user:{ version }
+ sudo docker pull tuannq(repo)/wtt(group):wtt-user-{ version }
  ```
  ## View image 
  ```
@@ -36,3 +36,12 @@
  ```
   sudo docker rmi {image_id}
  ```
+ ## View process
+ ```
+  sudo docker ps
+ ```
+ ## Attach process
+ ```
+  sudo docker logs -f {id-process}
+ ```
+ 
