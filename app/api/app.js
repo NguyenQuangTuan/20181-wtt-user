@@ -38,25 +38,30 @@ const AuthenService = require('../../services/authen-service')
 const TokenService = require('../../services/token-service')
 const FollowService = require('../../services/follow-service')
 const FavoriteService = require('../../services/favorite-service')
+const UserService = require('../../services/user-service')
 
 const authen_service = new AuthenService(user_repository, kafka_producer)
 const token_service = new TokenService()
 const follow_service = new FollowService(follow_repository)
 const favorite_service = new FavoriteService(favorite_repository)
+const user_service = new UserService(user_repository)
 
 // Controllers
 const AuthenController = require('./controllers/authen-controller')
 const FollowController = require('./controllers/follow-controller')
 const FavoriteController = require('./controllers/favorite-controller')
+const UserController = require('./controllers/user-controller')
 
 const authen_controller = new AuthenController(authen_service, token_service)
 const follow_controller = new FollowController(follow_service)
 const favorite_controller = new FavoriteController(favorite_service)
+const user_controller = new UserController(user_service)
 
 // Routes
 require('./routes/authen-route')(app, authen_controller)
 require('./routes/follow-route')(app, follow_controller)
 require('./routes/favorite-route')(app, favorite_controller)
+require('./routes/user-route')(app, user_controller)
 
 // Error Handling
 app.use((err, req, res, next) => {
