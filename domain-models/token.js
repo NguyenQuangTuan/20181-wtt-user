@@ -2,7 +2,8 @@ module.exports = class Token {
   constructor(params) {
     this.token_obj = {
       user_id: params.user_id,
-      email: params.email
+      email: params.email,
+      full_name: params.full_name
     }
   }
 

@@ -23,6 +23,7 @@ module.exports = class {
   update(req, res, next) {
     let { user_id } = req.authen_user
     let { user } = req.body
+    user = lodash.pick(user, ['avatar_url'])
 
     this.user_service.update(user_id, user, (err, updated) => {
       if (err) next(err)

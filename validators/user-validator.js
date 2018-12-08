@@ -7,8 +7,7 @@ const validator = new Validator()
 let update = {
   type: 'object',
   props: {
-    full_name: { type: 'string' },    
-    avatar_url: { type: 'string', optional: true }
+    avatar_url: { type: 'string' }
   }
 }
 
@@ -19,5 +18,5 @@ let validate_update = validator.compile({ update })
 module.exports = {
   validate_update: (request) => {
     return errors_aggregator.aggregate(validate_update(request))
-  } 
+  }
 }

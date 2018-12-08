@@ -43,7 +43,7 @@ const UserService = require('../../services/user-service')
 const authen_service = new AuthenService(user_repository, kafka_producer)
 const token_service = new TokenService()
 const follow_service = new FollowService(follow_repository)
-const favorite_service = new FavoriteService(favorite_repository)
+const favorite_service = new FavoriteService(favorite_repository, kafka_producer)
 const user_service = new UserService(user_repository)
 
 // Controllers
