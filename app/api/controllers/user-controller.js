@@ -14,7 +14,7 @@ module.exports = class {
     this.user_service.find_one({ user_id }, [], (err, user) => {
       if (err) next(err)
       else {
-        res.user = lodash.omit(user, ['hash', 'salt'])
+        res.user = { user: lodash.omit(user, ['hash', 'salt']) }
         next()
       }
     })
