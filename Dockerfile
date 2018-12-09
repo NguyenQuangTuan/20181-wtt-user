@@ -25,5 +25,6 @@ WORKDIR /usr/src/wtt-user
 COPY package.json /usr/src/wtt-user
 RUN npm install
 COPY . /usr/src/wtt-user
+RUN npm install pm2 -g
 EXPOSE  8080
-CMD [ "node", "./app/api/app.js" ]
+CMD [ "pm2-runtime", "./launcher/server.yml" ]
