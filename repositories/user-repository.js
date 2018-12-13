@@ -176,12 +176,8 @@ const handle_condition_autocomplete = (condition) => {
   let condition_keys = Object.keys(condition)
   condition_keys.forEach(key => {
     switch (key) {
-      case 'title': {
-        sub_bool = lodash.union(sub_bool, handle_query_sub_bool('title.autocomplete', condition[key]))
-        break
-      }
-      case 'content': {
-        sub_bool = lodash.union(sub_bool, handle_query_sub_bool('content', condition[key]))
+      case 'full_name': {
+        sub_bool = lodash.union(sub_bool, handle_query_sub_bool('full_name.autocomplete', condition[key]))
         break
       }
     }
@@ -199,24 +195,8 @@ const handle_condition_find_all = (condition) => {
         sub_bool = lodash.union(sub_bool, handle_query_sub_bool('user_id', condition[key]))
         break
       }
-      case 'title': {
-        sub_bool = lodash.union(sub_bool, handle_query_sub_bool('title', condition[key]))
-        break
-      }
-      case 'content': {
-        sub_bool = lodash.union(sub_bool, handle_query_sub_bool('content', condition[key]))
-        break
-      }
-      case 'user_id': {
-        sub_bool = lodash.union(sub_bool, handle_query_sub_bool('user_id', condition[key]))
-        break
-      }
-      case 'rating_average': {
-        sub_bool = lodash.union(sub_bool, handle_query_sub_bool('rating_average', condition[key]))
-        break
-      }
-      case 'tags': {
-        sub_bool = lodash.union(sub_bool, handle_query_sub_bool('tags', condition[key]))
+      case 'full_name': {
+        sub_bool = lodash.union(sub_bool, handle_query_sub_bool('full_name', condition[key]))
         break
       }
     }

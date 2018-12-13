@@ -6,6 +6,7 @@ module.exports = class UserService {
     this.user_repository = user_repository
 
     this.find_one = this.find_one.bind(this)
+    this.find_all = this.find_all.bind(this)
     this.update = this.update.bind(this)
   }
 
@@ -17,6 +18,16 @@ module.exports = class UserService {
         if (err) return callback(err)
         else if (!user) return callback({ type: 'Not Found' })
         else return callback(null, user)
+      }
+    )
+  }
+
+  find_all(condition, select, offset, limit, order_by, callback) {
+    async.retry(
+      config.retry,
+      async.apply(this.user_repository.find_all, condition, select, offset, limit, order_by),
+      (err, users) => {
+        return callback(err, users)
       }
     )
   }
