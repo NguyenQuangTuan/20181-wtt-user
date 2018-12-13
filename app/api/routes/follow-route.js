@@ -26,4 +26,18 @@ module.exports = (app, follow_controller) => {
       res.status(200).send(res.upserted)
     }
   )
+
+  app.get('/follows/followme/userid', // lay ds ng fl minh
+    follow_controller.get_list_followme_by_user_id,
+    (req, res) => {
+      res.status(200).send(res.user_ids)
+    }
+  )
+
+  app.get('/follows/following/userid', // lay ds minh fl
+    follow_controller.get_list_following_by_user_id,
+    (req, res) => {
+      res.status(200).send(res.user_ids)
+    }
+  )
 }
