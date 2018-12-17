@@ -5,9 +5,20 @@ module.exports = class UserService {
   constructor(user_repository) {
     this.user_repository = user_repository
 
+    this.autocomplete = this.autocomplete.bind(this)
     this.find_one = this.find_one.bind(this)
     this.find_all = this.find_all.bind(this)
     this.update = this.update.bind(this)
+  }
+
+  autocomplete(condition, select, offset, limit, callback) {
+    async.retry(
+      config.retry,
+      async.apply(this.user_repository.autocomplete, condition, select, offset, limit),
+      (err, users) => {
+        return callback(err, users)
+      }
+    )
   }
 
   find_one(condition, select, callback) {

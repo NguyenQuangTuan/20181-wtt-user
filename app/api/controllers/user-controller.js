@@ -4,9 +4,24 @@ module.exports = class {
   constructor(user_service) {
     this.user_service = user_service
 
+    this.autocomplete = this.autocomplete.bind(this)
     this.find_one = this.find_one.bind(this)
     this.find_all = this.find_all.bind(this)
     this.update = this.update.bind(this)
+  }
+
+  autocomplete(req, res, next) {
+    let { full_name = '' } = req.query
+    let list_query_must = {}
+    if (full_name) list_query_must = Object.assign(list_query_must, { full_name })
+
+    this.user_service.autocomplete({ list_query_must }, ['full_name'], 0, 5, (err, users) => {
+      if (err) next(err)
+      else {
+        res.users = { users }
+        next()
+      }
+    })
   }
 
   find_one(req, res, next) {

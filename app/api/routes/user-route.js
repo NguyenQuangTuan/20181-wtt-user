@@ -2,6 +2,14 @@ const tokent_middleware = require('../middlewares/tokent-middleware')
 const user_middleware = require('../middlewares/user-middleware')
 
 module.exports = (app, user_controller) => {
+  //autoconplete
+  app.get('/users/autocomplete',
+    user_controller.autocomplete,
+    (req, res) => {
+      res.status(200).send(res.users)
+    }
+  )
+
   // get all
   app.get('/users',
     user_controller.find_all,
